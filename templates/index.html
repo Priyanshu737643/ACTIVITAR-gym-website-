@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ACTIVITAR | Fitness & Sport</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #080808;
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 25px 7%;
+
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.85),
+                transparent
+            );
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-family: 'Oswald', sans-serif;
+            font-size: 23px;
+            font-weight: 600;
+
+            letter-spacing: 3px;
+        }
+
+        .logo-icon {
+            color: #ff4b0b;
+            font-size: 27px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Oswald', sans-serif;
+
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links .active {
+            color: #ff4b0b;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            font-size: 13px;
+        }
+
+        .social-icons a {
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #ff4b0b;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            height: 92vh;
+            min-height: 650px;
+
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.55),
+                    rgba(15,0,0,0.75)
+                ),
+                url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=2000&q=90");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(255,70,0,0.25),
+                    transparent 55%
+                );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        .hero-small {
+            font-size: 30px;
+            font-weight: 300;
+        }
+
+        .orange {
+            color: #ff4b0b;
+        }
+
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+
+            font-size: clamp(55px, 8vw, 105px);
+
+            line-height: 0.95;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            text-shadow:
+                4px 5px 15px rgba(0,0,0,0.9);
+        }
+
+        .hero-description {
+            max-width: 600px;
+
+            margin: 25px auto;
+
+            color: #ddd;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 13px 32px;
+
+            border: 1px solid #ff4b0b;
+
+            color: white;
+
+            font-family: 'Oswald', sans-serif;
+
+            font-size: 13px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #ff4b0b;
+
+            box-shadow:
+                0 0 25px rgba(255,75,11,0.35);
+        }
+
+        /* ================= ARROWS ================= */
+
+        .slider-arrow {
+            position: absolute;
+
+            top: 50%;
+
+            z-index: 5;
+
+            font-size: 45px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .slider-arrow:hover {
+            color: #ff4b0b;
+        }
+
+        .left-arrow {
+            left: 7%;
+        }
+
+        .right-arrow {
+            right: 7%;
+        }
+
+        .dots {
+            position: absolute;
+
+            bottom: 25px;
+
+            z-index: 5;
+
+            display: flex;
+
+            gap: 8px;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #777;
+        }
+
+        .dot.active {
+            background: white;
+        }
+
+        /* ================= FEATURE CARDS ================= */
+
+        .features {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+        }
+
+        .feature-card {
+            min-height: 240px;
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 35px;
+
+            overflow: hidden;
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .feature-card::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background: rgba(0,0,0,0.65);
+        }
+
+        .feature-card:nth-child(1) {
+            background-image:
+                url("https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1000&q=80");
+        }
+
+        .feature-card:nth-child(2) {
+            background-image:
+                url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1000&q=80");
+        }
+
+        .feature-card:nth-child(3) {
+            background-image:
+                url("https://images.unsplash.com/photo-1532384748853-8f54a8f476e2?auto=format&fit=crop&w=1000&q=80");
+        }
+
+        .feature-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-icon {
+            font-size: 32px;
+
+            color: #ff4b0b;
+
+            margin-bottom: 10px;
+        }
+
+        .feature-card h3 {
+            font-family: 'Oswald', sans-serif;
+
+            font-size: 25px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            max-width: 300px;
+
+            margin: auto;
+
+            color: #ddd;
+
+            font-size: 12px;
+
+            line-height: 1.7;
+        }
+
+        .small-btn {
+            display: inline-block;
+
+            margin-top: 18px;
+
+            border: 1px solid #ff4b0b;
+
+            padding: 9px 20px;
+
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .small-btn:hover {
+            background: #ff4b0b;
+        }
+
+        /* ================= ABOUT ================= */
+
+        .about-preview {
+            padding: 100px 8%;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 70px;
+
+            align-items: center;
+
+            background: #0d0d0d;
+        }
+
+        .about-image {
+            height: 500px;
+
+            background:
+                url("https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1000&q=90");
+
+            background-size: cover;
+
+            background-position: center;
+        }
+
+        .section-label {
+            color: #ff4b0b;
+
+            font-size: 13px;
+
+            letter-spacing: 4px;
+
+            font-weight: 600;
+
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+
+            font-size: 55px;
+
+            text-transform: uppercase;
+
+            line-height: 1;
+
+            margin: 15px 0 25px;
+        }
+
+        .about-preview p {
+            color: #aaa;
+
+            line-height: 1.9;
+
+            margin-bottom: 20px;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            padding: 60px 8%;
+
+            background: #ff4b0b;
+
+            text-align: center;
+        }
+
+        .stat h2 {
+            font-family: 'Oswald', sans-serif;
+
+            font-size: 45px;
+        }
+
+        .stat p {
+            text-transform: uppercase;
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            padding: 50px 8%;
+
+            background: #050505;
+
+            text-align: center;
+        }
+
+        footer p {
+            color: #777;
+
+            font-size: 13px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width: 900px) {
+
+            .nav-links,
+            .social-icons {
+                display: none;
+            }
+
+            .features,
+            .about-preview {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                height: 400px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+
+                gap: 35px;
+            }
+        }
+
+        @media(max-width: 600px) {
+
+            .navbar {
+                padding: 20px;
+            }
+
+            .hero-small {
+                font-size: 22px;
+            }
+
+            .hero h1 {
+                font-size: 55px;
+            }
+
+            .section-title {
+                font-size: 42px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <a href="{% url 'index' %}" class="logo">
+
+        <span class="logo-icon">▰</span>
+
+        ACTIVITAR
+
+    </a>
+
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="{% url 'index' %}" class="active">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'about' %}">
+                About Us
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'services' %}">
+                Services
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                Schedule
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                Gallery
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                Blog
+            </a>
+        </li>
+
+        <li>
+            <a href="{% url 'contact' %}">
+                Contacts
+            </a>
+        </li>
+
+    </ul>
+
+
+    <div class="social-icons">
+
+        <a href="#">P</a>
+        <a href="#">in</a>
+        <a href="#">P</a>
+        <a href="#">▶</a>
+        <a href="#">◎</a>
+
+    </div>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="slider-arrow left-arrow">
+        ‹
+    </div>
+
+
+    <div class="hero-content">
+
+        <div class="hero-small">
+            JOIN US <span class="orange">NOW</span>
+        </div>
+
+
+        <h1>
+
+            FITNESS &<br>
+
+            <span class="orange">
+                SPORT
+            </span>
+
+        </h1>
+
+
+        <p class="hero-description">
+
+            Push your limits. Build your strength.
+            Transform your body and create a healthier,
+            stronger version of yourself.
+
+        </p>
+
+
+        <a href="{% url 'services' %}" class="btn">
+            Read More
+        </a>
+
+    </div>
+
+
+    <div class="slider-arrow right-arrow">
+        ›
+    </div>
+
+
+    <div class="dots">
+
+        <span class="dot active"></span>
+
+        <span class="dot"></span>
+
+        <span class="dot"></span>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURE CARDS ================= -->
+
+<section class="features">
+
+
+    <div class="feature-card">
+
+        <div class="feature-content">
+
+            <div class="feature-icon">
+                ⚡
+            </div>
+
+            <h3>
+                Group Classes
+            </h3>
+
+            <p>
+                High-energy group workouts designed
+                to challenge you and keep you motivated.
+            </p>
+
+            <a href="{% url 'services' %}" class="small-btn">
+                Read More
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <div class="feature-content">
+
+            <div class="feature-icon">
+                🏋
+            </div>
+
+            <h3>
+                Personal Training
+            </h3>
+
+            <p>
+                Personalized training programs designed
+                around your body and fitness goals.
+            </p>
+
+            <a href="{% url 'services' %}" class="small-btn">
+                Read More
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <div class="feature-content">
+
+            <div class="feature-icon">
+                🥗
+            </div>
+
+            <h3>
+                Sports Nutrition
+            </h3>
+
+            <p>
+                Smart nutrition guidance to help your
+                body recover and perform better.
+            </p>
+
+            <a href="{% url 'services' %}" class="small-btn">
+                Read More
+            </a>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<!-- ================= ABOUT PREVIEW ================= -->
+
+<section class="about-preview">
+
+
+    <div class="about-image"></div>
+
+
+    <div>
+
+        <div class="section-label">
+            About Activitar
+        </div>
+
+
+        <h2 class="section-title">
+
+            Train Hard.<br>
+
+            <span class="orange">
+                Live Strong.
+            </span>
+
+        </h2>
+
+
+        <p>
+
+            ACTIVITAR is more than just a gym.
+            We are a community built around strength,
+            discipline and healthy living.
+
+        </p>
+
+
+        <p>
+
+            Whether you're starting your fitness journey
+            or looking to take your performance to the next
+            level, our trainers and programs are designed
+            to help you achieve your goals.
+
+        </p>
+
+
+        <a href="{% url 'about' %}" class="btn">
+            Discover More
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= STATS ================= -->
+
+<section class="stats">
+
+
+    <div class="stat">
+
+        <h2>10+</h2>
+
+        <p>
+            Years Experience
+        </p>
+
+    </div>
+
+
+    <div class="stat">
+
+        <h2>25+</h2>
+
+        <p>
+            Expert Trainers
+        </p>
+
+    </div>
+
+
+    <div class="stat">
+
+        <h2>2K+</h2>
+
+        <p>
+            Happy Members
+        </p>
+
+    </div>
+
+
+    <div class="stat">
+
+        <h2>50+</h2>
+
+        <p>
+            Weekly Classes
+        </p>
+
+    </div>
+
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="logo">
+
+        <span class="logo-icon">
+            ▰
+        </span>
+
+        ACTIVITAR
+
+    </div>
+
+    <p>
+
+        © 2026 ACTIVITAR Fitness & Sport.
+        All Rights Reserved.
+
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>
